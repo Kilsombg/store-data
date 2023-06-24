@@ -7,21 +7,17 @@ namespace store_data.Services
 {
     public class MongoDBService
     {
-        private readonly IMongoCollection<BsonDocument> _laptopCollection;
+        private readonly IMongoCollection<Models.Mongo.LaptopModel> _laptopCollection;
 
         public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings) {
             MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
             IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
-            _laptopCollection = database.GetCollection<BsonDocument>(mongoDBSettings.Value.CollectionName);
-
-            TestConnection(client);
+            _laptopCollection = database.GetCollection<Models.Mongo.LaptopModel>(mongoDBSettings.Value.LaptopCollectionName);
         }
 
-
-        public async void TestConnection(MongoClient client)
+        public IMongoCollection<Models.Mongo.LaptopModel> GetLaptopCollection()
         {
-            var databases = await client.ListDatabaseNames().ToListAsync();
-            Console.WriteLine(databases);
+            return _laptopCollection;
         }
     }
 }
