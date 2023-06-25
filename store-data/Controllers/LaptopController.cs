@@ -26,7 +26,7 @@ namespace store_data.Controllers
                 return BadRequest(ModelState);
             }
 
-            _laptopService.AddOneAsync(laptop);
+            await _laptopService.AddOneAsync(laptop);
             return Ok();
         }
 

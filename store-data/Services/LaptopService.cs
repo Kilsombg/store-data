@@ -15,11 +15,18 @@ namespace store_data.Services
         {
             return await _laptopCollection.Find(new BsonDocument()).ToListAsync();   
         }
-
         public async Task AddOneAsync(LaptopModel laptop)
         {
+            laptop = TransformLaptop(laptop);
             await _laptopCollection.InsertOneAsync(laptop);
             return;
+        }
+
+
+        private LaptopModel TransformLaptop(LaptopModel laptop)
+        {
+           laptop.Price = Math.Round(laptop.Price, 2);
+            return laptop;
         }
     }
 }
