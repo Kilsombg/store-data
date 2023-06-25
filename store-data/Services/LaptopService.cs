@@ -11,9 +11,9 @@ namespace store_data.Services
             _laptopCollection = mongoDBService.GetLaptopCollection();
         }
 
-        public async Task<IEnumerable<LaptopModel>> GetAsync()
+        public async Task<IEnumerable<LaptopModel>> GetAsync(int limit = 3)
         {
-            return await _laptopCollection.Find(new BsonDocument()).ToListAsync();   
+            return await _laptopCollection.Find(new BsonDocument()).Limit(limit).ToListAsync();   
         }
         public async Task AddOneAsync(LaptopModel laptop)
         {
