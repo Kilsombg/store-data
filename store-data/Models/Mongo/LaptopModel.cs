@@ -9,7 +9,7 @@ namespace store_data.Models.Mongo
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? _id { get; set; }
-        public string ImgURL { get; set; }
+        public object ImgURL { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
